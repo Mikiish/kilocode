@@ -8,6 +8,7 @@ import { codebaseIndexProviderSchema } from "./codebase-index.js"
  */
 
 export const providerNames = [
+	"auto",
 	"anthropic",
 	"claude-code",
 	"glama",
@@ -242,11 +243,14 @@ const cerebrasSchema = baseProviderSettingsSchema.extend({
 })
 // kilocode_change end
 
+const autoSchema = openAiSchema.merge(anthropicSchema).extend({ apiProvider: z.literal("auto") })
+
 const defaultSchema = z.object({
 	apiProvider: z.undefined(),
 })
 
 export const providerSettingsSchemaDiscriminated = z.discriminatedUnion("apiProvider", [
+	autoSchema,
 	anthropicSchema.merge(z.object({ apiProvider: z.literal("anthropic") })),
 	claudeCodeSchema.merge(z.object({ apiProvider: z.literal("claude-code") })),
 	glamaSchema.merge(z.object({ apiProvider: z.literal("glama") })),

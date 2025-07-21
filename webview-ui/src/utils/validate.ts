@@ -92,6 +92,11 @@ function validateModelsAndKeysProvided(apiConfiguration: ProviderSettings): stri
 				return i18next.t("settings:validation.openAi")
 			}
 			break
+		case "auto":
+			if (!apiConfiguration.openAiApiKey || !apiConfiguration.openAiModelId || !apiConfiguration.apiKey) {
+				return i18next.t("settings:validation.apiKey")
+			}
+			break
 		case "ollama":
 			if (!apiConfiguration.ollamaModelId) {
 				return i18next.t("settings:validation.modelId")
@@ -176,6 +181,8 @@ function getModelIdForProvider(apiConfiguration: ProviderSettings, provider: str
 			return apiConfiguration.litellmModelId
 		case "openai":
 			return apiConfiguration.openAiModelId
+		case "auto":
+			return apiConfiguration.openAiModelId ?? apiConfiguration.apiModelId
 		case "ollama":
 			return apiConfiguration.ollamaModelId
 		case "lmstudio":
