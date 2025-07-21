@@ -34,6 +34,7 @@ import {
 // kilocode_change start
 import { FireworksHandler } from "./providers/fireworks"
 import { KilocodeOpenrouterHandler } from "./providers/kilocode-openrouter"
+import { AutoHandler } from "./providers/auto"
 // kilocode_change end
 
 export interface SingleCompletionHandler {
@@ -71,6 +72,8 @@ export function buildApiHandler(configuration: ProviderSettings): ApiHandler {
 	switch (apiProvider) {
 		case "kilocode":
 			return new KilocodeOpenrouterHandler(options)
+		case "auto":
+			return new AutoHandler(options)
 		case "anthropic":
 			return new AnthropicHandler(options)
 		case "claude-code":
