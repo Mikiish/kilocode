@@ -5,9 +5,10 @@ import type { ProviderSettings, ModelInfo } from "@roo-code/types"
 import { ApiStream } from "./transform/stream"
 
 import {
-	GlamaHandler,
-	AnthropicHandler,
-	AwsBedrockHandler,
+        GlamaHandler,
+        AnthropicHandler,
+       AutoHandler,
+        AwsBedrockHandler,
 	OpenRouterHandler,
 	VertexHandler,
 	AnthropicVertexHandler,
@@ -68,9 +69,11 @@ export interface ApiHandler {
 export function buildApiHandler(configuration: ProviderSettings): ApiHandler {
 	const { apiProvider, ...options } = configuration
 
-	switch (apiProvider) {
-		case "kilocode":
-			return new KilocodeOpenrouterHandler(options)
+        switch (apiProvider) {
+               case "auto":
+                       return new AutoHandler(options)
+                case "kilocode":
+                        return new KilocodeOpenrouterHandler(options)
 		case "anthropic":
 			return new AnthropicHandler(options)
 		case "claude-code":
