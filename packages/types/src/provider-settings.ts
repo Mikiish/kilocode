@@ -8,8 +8,8 @@ import { codebaseIndexProviderSchema } from "./codebase-index.js"
  */
 
 export const providerNames = [
-       "auto",
-        "anthropic",
+	"auto",
+	"anthropic",
 	"claude-code",
 	"glama",
 	"openrouter",
@@ -238,8 +238,8 @@ const fireworksSchema = baseProviderSettingsSchema.extend({
 })
 
 const cerebrasSchema = baseProviderSettingsSchema.extend({
-        cerebrasApiKey: z.string().optional(),
-        cerebrasModelId: z.string().optional(),
+	cerebrasApiKey: z.string().optional(),
+	cerebrasModelId: z.string().optional(),
 })
 // kilocode_change end
 
@@ -250,8 +250,8 @@ const defaultSchema = z.object({
 })
 
 export const providerSettingsSchemaDiscriminated = z.discriminatedUnion("apiProvider", [
-       autoSchema.merge(z.object({ apiProvider: z.literal("auto") })),
-       anthropicSchema.merge(z.object({ apiProvider: z.literal("anthropic") })),
+	autoSchema.merge(z.object({ apiProvider: z.literal("auto") })),
+	anthropicSchema.merge(z.object({ apiProvider: z.literal("anthropic") })),
 	claudeCodeSchema.merge(z.object({ apiProvider: z.literal("claude-code") })),
 	glamaSchema.merge(z.object({ apiProvider: z.literal("glama") })),
 	openRouterSchema.merge(z.object({ apiProvider: z.literal("openrouter") })),
@@ -281,9 +281,9 @@ export const providerSettingsSchemaDiscriminated = z.discriminatedUnion("apiProv
 ])
 
 export const providerSettingsSchema = z.object({
-        apiProvider: providerNamesSchema.optional(),
-       ...autoSchema.shape,
-        ...anthropicSchema.shape,
+	apiProvider: providerNamesSchema.optional(),
+	...autoSchema.shape,
+	...anthropicSchema.shape,
 	...claudeCodeSchema.shape,
 	...glamaSchema.shape,
 	...openRouterSchema.shape,
